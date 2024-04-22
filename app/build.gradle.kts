@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.abdo.mycalculator_project"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.abdo.mycalculator_project"

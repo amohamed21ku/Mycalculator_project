@@ -1,18 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<!-- Root LinearLayout containing the entire calculator layout -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/backblack">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- ConstraintLayout for the display area -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- TextView to display calculation -->
+        <TextView
+            android:id="@+id/calculation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:maxLines="2"
+            android:text=""
+            android:textAlignment="textEnd"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toTopOf="@+id/result"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- TextView to display result -->
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:lines="1"
+            android:maxLines="1"
+            android:text=""
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.058"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 1st button row -->
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <!-- Button to clear all -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="AC"
+            android:textColor="@color/black"
+            android:onClick="allClearAction" />
+
+        <!-- Button to delete the last digit -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="DEL"
+            android:textColor="@color/black"
+            android:onClick="backSpaceAction" />
+
+        <!-- Placeholder button -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="placeholder"
+            android:visibility="invisible" />
+
+        <!-- Button for division -->
+        <Button
+            style="@style/buttonOperator"
+            android:text="÷"
+            android:onClick="divideAction"/>
+
+    </LinearLayout>
+
+    <!-- 2nd Button rows -->
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <!-- Buttons for numbers 7, 8, 9, and x -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="7"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="8"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="9"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonOperator"
+            android:text="×"
+            android:onClick="multiplyAction" />
+
+    </LinearLayout>
+
+    <!-- 3rd Button rows -->
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <!-- Buttons for numbers 4, 5, 6, and - -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="4"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="5"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="6"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonOperator"
+            android:text="-"
+            android:onClick="subtractAction" />
+
+    </LinearLayout>
+
+    <!-- 4th Button rows -->
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <!-- Buttons for numbers 1, 2, 3, and addition -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="1"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="2"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="3"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonOperator"
+            android:text="+"
+            android:onClick="addAction" />
+
+    </LinearLayout>
+
+    <!-- 5th Button rows -->
+    <LinearLayout
+        style="@style/buttonRow">
+
+        <!-- Buttons for decimal point, zero, and equals -->
+        <Button
+            style="@style/buttonNumber"
+            android:text="."
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="0"
+            android:onClick="numberClicked" />
+        <Button
+            style="@style/buttonNumber"
+            android:text="="
+            android:onClick="equalsAction" />
+
+    </LinearLayout>
+
+</LinearLayout>
