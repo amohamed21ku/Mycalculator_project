@@ -13,12 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize TextViews using View Binding (assuming you have a layout file named activity_main.xml)
         calculationTextView = findViewById(R.id.calculation)
         resultTextView = findViewById(R.id.result)
     }
 
-    // These functions should not be @Composable
     fun allClearAction(view: View) {
         calculationTextView.text = ""
         resultTextView.text = ""
@@ -54,55 +52,33 @@ class MainActivity : AppCompatActivity() {
 
     fun equalsAction(view: View) {
         resultTextView.text = calculateResults()
-        calculationTextView.text = " "
+        calculationTextView.text = ""
     }
 
     private fun calculateResults(): String {
         val digitsOperators = digitsOperators(calculationTextView.text.toString())
         if (digitsOperators.isEmpty()) return ""
 
-        val timesDivision = timesDivisionCalculate(digitsOperators)
-        if (timesDivision.isEmpty()) return ""
-
-        val result = addSubtractCalculate(timesDivision)
+        val result = performOperations(digitsOperators)
         return result.toString()
     }
 
-    private fun addSubtractCalculate(passedList: MutableList<Any>): Float {
+    private fun performOperations(passedList: MutableList<Any>): Float {
         var result = passedList[0] as Float
 
         for (i in 1 until passedList.size step 2) {
             val operator = passedList[i] as Char
             val nextDigit = passedList[i + 1] as Float
+
             when (operator) {
                 '+' -> result += nextDigit
                 '-' -> result -= nextDigit
+                '×' -> result *= nextDigit
+                '÷' -> result /= nextDigit
             }
         }
 
         return result
-    }
-
-    private fun timesDivisionCalculate(passedList: MutableList<Any>): MutableList<Any> {
-        val list = mutableListOf<Any>()
-        var tempResult = 0.0f
-        var operator = '+'
-
-        for (item in passedList) {
-            if (item is Char && (item == '×' || item == '÷')) {
-                operator = item
-            } else if (item is Float) {
-                when (operator) {
-                    '+' -> tempResult += item
-                    '-' -> tempResult -= item
-                    '×' -> tempResult *= item
-                    '÷' -> tempResult /= item
-                }
-            }
-        }
-
-        list.add(tempResult)
-        return list
     }
 
     private fun digitsOperators(expression: String): MutableList<Any> {
